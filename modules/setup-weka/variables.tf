@@ -26,7 +26,6 @@ variable "random_pet_id" {
 variable "name_prefix" {
   type        = string
   description = "Prefix for naming resources"
-  default     = "setup"  # You can change this default if needed
 }
 
 variable "ami_id" {
@@ -46,3 +45,25 @@ variable "instance_count" {
   description = "Number of EC2 instances to create"
   default     = 5
 }
+
+variable "private_key_pem" {
+  type        = string
+  description = "The private key content"
+  sensitive   = true
+}
+variable "other_private_ips" {
+  type        = list(string)
+  description = "List of private IPs from the other module"
+}
+
+variable "other_public_ips" {
+  type        = list(string)
+  description = "List of public IPs from the other module"
+}
+
+variable "weka_version" {
+  type        = string
+  description = "Weka version"
+  default     = "4.2.15"
+}
+

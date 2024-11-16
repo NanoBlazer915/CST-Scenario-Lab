@@ -1,7 +1,7 @@
 module "base_infrastructure" {
   source      = "../../../modules/base"
   client_instance_type = "t4g.large"
-  ami_id = "ami-012967cc5a8c9f891"
+  client_ami_id = "ami-012967cc5a8c9f891"
   name_prefix = "working-weka"
 }
 

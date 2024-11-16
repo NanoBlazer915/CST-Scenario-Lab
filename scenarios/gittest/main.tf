@@ -1,10 +1,10 @@
 module "base_infrastructure" {
-  source      = "git::https://github.com/NanoBlazer915/repo.git//from-scratch/modules/base"
+  source      = "git::https://github.com/NanoBlazer915/CST-Scenario-Lab.git//modules/base"
   name_prefix = "working-weka"
 }
 
 module "scenario_infrastructure" {
-  source      = "git::https://github.com/NanoBlazer915/repo.git//from-scratch/modules/weka-installed"
+  source      = "git::https://github.com/NanoBlazer915/CST-Scenario-Lab.git//modules/weka-installed"
   name_prefix = "working-weka"
   
   subnet_id         = module.base_infrastructure.subnet_id

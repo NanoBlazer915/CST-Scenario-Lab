@@ -57,7 +57,7 @@ sudo yum update -y
 sudo yum install git pdsh -y
 
 # Download and extract Weka
-curl -LO https://dNTW8maCGBuuAa0Y@get.weka.io/dist/v1/pkg/weka-$(cat weka-version.txt).tar
+curl -LO https://adne06LKcE5bqkGa@get.weka.io/dist/v1/pkg/weka-$(cat weka-version.txt).tar
 tar xvf weka-$(cat weka-version.txt).tar
 cd weka-$(cat weka-version.txt)
 sudo ./install.sh

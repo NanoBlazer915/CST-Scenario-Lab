@@ -2,18 +2,6 @@ variable "region" {
     default = "us-east-1"
 }
 
-variable "cidr_block" {
-    default = "10.10.0.0/16"
-}
-
-variable "subnet_cidr" {
-    default = "10.10.0.0/19"
-}
-
-variable "environment" {
-    default = "CST-Scenario-lab"
-}
-
 variable "instance_count" {
   description = "The number of EC2 instances to create"
   type        = number
@@ -48,24 +36,30 @@ variable "client_ami_id" {
   default     = "ami-018ba43095ff50d08"
 }
 
+#######
+###### Add these later 
+#variable "expiration_tag_key" {
+#  description = "Tag key to identify instances for auto-destruction"
+#  type        = string
+#  default     = "AutoDestroy"
+#}
+#
+#variable "expiration_tag_value" {
+#  description = "Tag value to identify instances for auto-destruction"
+#  type        = string
+#  default     = "true"
+#}
+#
+#variable "expiration_time" {
+#  description = "Time limit in hours after which instances should be destroyed"
+#  type        = number
+#  default     = 4
+#}
+#
+##############
+#############
 
-variable "expiration_tag_key" {
-  description = "Tag key to identify instances for auto-destruction"
-  type        = string
-  default     = "AutoDestroy"
-}
 
-variable "expiration_tag_value" {
-  description = "Tag value to identify instances for auto-destruction"
-  type        = string
-  default     = "true"
-}
-
-variable "expiration_time" {
-  description = "Time limit in hours after which instances should be destroyed"
-  type        = number
-  default     = 4
-}
 variable "s3_bucket_name" {
   description = "Name of the existing S3 bucket for Lambda code"
   type        = string

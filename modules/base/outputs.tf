@@ -61,3 +61,9 @@ output "instance_public_ips" {
   description = "List of public IPs from the EC2 instances"
   value       = [for instance in aws_instance.cst_scenario_backend : instance.public_ip]
 }
+
+output "instance_ids" {
+  description = "List of instance IDs for backend instances"
+  value       = aws_instance.cst_scenario_backend[*].id
+}
+

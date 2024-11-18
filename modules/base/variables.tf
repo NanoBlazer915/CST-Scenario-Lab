@@ -105,4 +105,21 @@ variable "route_table_id" {
     default = "rtb-0104f6891bced69db"
 }
 
+variable "smb_protocol" {
+  description = "Boolean to enable smb"
+  type        = bool
+  default     = false
+}
+
+variable "nfs_protocol" {
+  description = "Boolean to enable nfs"
+  type        = bool
+  default     = false
+}
+
+variable "s3_protocol" {
+  description = "Boolean to enable s3"
+  type        = bool
+  default     = false
+}
 

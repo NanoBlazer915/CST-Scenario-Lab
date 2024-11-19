@@ -101,7 +101,7 @@ locals {
 # Use a null_resource to run a local-exec provisioner to terminate instances
 resource "null_resource" "delayed_destruction" {
   provisioner "local-exec" {
-    command = "sleep 600 && aws ec2 terminate-instances --instance-ids ${join(" ", local.instances_to_destroy)}"
+    command = "sleep 460 && aws ec2 stop-instances --instance-ids ${join(" ", local.instances_to_destroy)}"
   }
 
   # Ensure the provisioner waits until everything is ready

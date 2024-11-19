@@ -45,7 +45,11 @@ variable "instance_count" {
   description = "Number of EC2 instances to create"
   default     = 5
 }
-
+variable "new_instance_count" {
+  type        = number
+  description = "Number of EC2 instances to create"
+  default     = 2
+}
 variable "private_key_pem" {
   type        = string
   description = "The private key content"

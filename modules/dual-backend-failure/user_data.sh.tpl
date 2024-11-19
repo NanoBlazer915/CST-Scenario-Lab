@@ -25,16 +25,24 @@ INSTANCE_INFO=$(aws ec2 describe-instances \
   --query "Reservations[].Instances[].{PrivateIp:PrivateIpAddress, PublicIp:PublicIpAddress}" \
   --output json)
 
+# Use AWS CLI to describe instances with the specific Name prefix
+INSTANCE_INFO_NEW_CLIENT=$(aws ec2 describe-instances \
+  --region "$REGION" \
+  --filters "Name=tag:Name,Values=New-${NAME_PREFIX}-*" \
+  --query "Reservations[].Instances[].{PrivateIp:PrivateIpAddress, PublicIp:PublicIpAddress}" \
+  --output json)
+
+
 # Use jq to extract only valid private and public IPs
 PRIVATE_IPS=$(echo "$INSTANCE_INFO" | jq -r '.[] | select(.PrivateIp != null) | .PrivateIp')
 PUBLIC_IPS=$(echo "$INSTANCE_INFO" | jq -r '.[] | select(.PublicIp != null) | .PublicIp')
+NEW_PRIVATE_IPS=$(echo "$INSTANCE_INFO_NEW_CLIENT" | jq -r '.[] | select(.PrivateIp != null) | .PrivateIp')
 
 echo "$PRIVATE_IPS" > /root/private-backends.txt
 echo "$PUBLIC_IPS" > /root/public-backends.txt
 echo "$NAME_PREFIX" > /root/instance-name.txt
-echo "SELF_PRIVATE_IP" > /root/self-ip.txt
 echo "$WEKA_VERSION" > /root/weka-version.txt
-
+echo "$NEW_PRIVATE_IPS" > /root/new-backend-ips.txt
 ################################################################################################
 ################################################################################################
 ################################################################################################

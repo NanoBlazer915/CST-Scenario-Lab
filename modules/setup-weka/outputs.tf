@@ -66,15 +66,3 @@ output "instance_ids" {
   description = "List of instance IDs for backend instances"
   value       = aws_instance.cst_scenario_backend[*].id
 }
-
-output "s3" {
-  value = var.s3
-}
-
-output "nfs" {
-  value = var.nfs
-}
-
-output "smb" {
-  value = var.smb
-}

@@ -30,21 +30,39 @@ resource "local_file" "autodestroy_private_key" {
   file_permission = "0600"  # Set secure permissions
 }
 
-resource "local_file" "smb_public_ips" {
-  count    = var.smb_protocol ? 1 : 0
-  content  = join("\n", [for instance in aws_instance.smb_protocol : instance.public_ip])
-  filename = "smb-public-backends.txt"
-}
-
+# resource "local_file" "smb_public_ips" {
+#   count    = var.smb_protocol ? 1 : 0
+#   content  = join("\n", [for instance in aws_instance.smb_protocol : instance.public_ip])
+#   filename = "smb-public-backends.txt"
+# }
+# 
+# resource "local_file" "nfs_public_ips" {
+#   count    = var.nfs_protocol ? 1 : 0
+#   content  = join("\n", [for instance in aws_instance.nfs_protocol : instance.public_ip])
+#   filename = "nfs-public-backends.txt"
+# }
+# 
+# resource "local_file" "s3_public_ips" {
+#   count    = var.s3_protocol ? 1 : 0
+#   content  = join("\n", [for instance in aws_instance.s3_protocol : instance.public_ip])
+#   filename = "s3-public-backends.txt"
+# }
+# 
 resource "local_file" "nfs_public_ips" {
-  count    = var.nfs_protocol ? 1 : 0
-  content  = join("\n", [for instance in aws_instance.nfs_protocol : instance.public_ip])
-  filename = "nfs-public-backends.txt"
+  count    = var.nfs ? 1 : 0
+  content  = join("\n", [for instance in aws_instance.nfs : instance.public_ip])
+  filename = "nfs_public_ips.txt"
 }
 
-resource "local_file" "s3_public_ips" {
-  count    = var.s3_protocol ? 1 : 0
-  content  = join("\n", [for instance in aws_instance.s3_protocol : instance.public_ip])
-  filename = "s3-public-backends.txt"
+# resource "local_file" "s3_public_ips" {
+#   count    = var.nfs_protocol ? 1 : 0
+#   content  = join("\n", [for instance in aws_instance.s3 : instance.public_ip])
+#   filename = "s3_public_ips.txt"
+# }
+# 
+
+resource "local_file" "scenario_chaos_ip" {
+  content  = join("\n", [for instance in aws_instance.cst_chaos_primary : instance.public_ip])
+  filename = "scenario_chaos_ip.txt"
 }
 

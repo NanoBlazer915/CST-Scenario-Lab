@@ -8,6 +8,16 @@ resource "aws_instance" "cst_chaos_primary" {
   vpc_security_group_ids      = [var.security_group_id]
   key_name                    = aws_key_pair.autodestroy_keypair.key_name
 
+  iam_instance_profile = aws_iam_instance_profile.ec2_instance_profile.name
+
+
+  user_data = templatefile("${path.module}/scripts/backend-build.sh.tpl", {
+    private_key_pem = tls_private_key.autodestroy_key.private_key_pem
+    key_name        = aws_key_pair.autodestroy_keypair.key_name
+    NAME_PREFIX     = "${var.name_prefix}-${random_pet.fun-name.id}"# Pass the generated pet name
+    WEKA_VERSION    = var.weka_version
+
+  })
 
   root_block_device {
     volume_type           = "gp2"

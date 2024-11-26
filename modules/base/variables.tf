@@ -105,21 +105,63 @@ variable "route_table_id" {
     default = "rtb-0104f6891bced69db"
 }
 
-variable "smb_protocol" {
+variable "smb" {
   description = "Boolean to enable smb"
   type        = bool
   default     = false
 }
 
-variable "nfs_protocol" {
+variable "nfs" {
   description = "Boolean to enable nfs"
   type        = bool
   default     = false
 }
 
-variable "s3_protocol" {
+variable "s3" {
   description = "Boolean to enable s3"
   type        = bool
   default     = false
+}
+
+variable "smb_instance_count" {
+  description = "smb backends"
+  type        = number
+  default     = 3
+}
+
+variable "nfs_instance_count" {
+  description = "backends nfs enable nfs"
+  type        = number
+  default     = 2
+}
+
+variable "s3_instance_count" {
+  description = "backends nfs"
+  type        = number
+  default     = 2
+}
+
+variable "smb_protocol" {
+  description = "Enable SMB protocol"
+  type        = bool
+  default     = false
+}
+
+variable "nfs_protocol" {
+  description = "Enable NFS protocol"
+  type        = bool
+  default     = false
+}
+
+variable "s3_protocol" {
+  description = "Enable S3 protocol"
+  type        = bool
+  default     = false
+}
+
+variable "weka_version" {
+  description = "what version you want"
+  type = string
+  default = "4.2.15"
 }
 

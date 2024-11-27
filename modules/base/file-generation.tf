@@ -61,7 +61,8 @@ resource "local_file" "nfs_public_ips" {
 # }
 # 
 
-resource "local_file" "scenario_chaos_ip" {
+  resource "local_file" "scenario_chaos_ip" {
+  count    = var.chaos_applied ? 0 : 1
   content  = join("\n", [for instance in aws_instance.cst_chaos_primary : instance.public_ip])
   filename = "scenario_chaos_ip.txt"
 }

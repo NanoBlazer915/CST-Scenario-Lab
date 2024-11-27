@@ -1,6 +1,6 @@
 # Create an IAM policy for describing and stopping instances, and accessing S3
 resource "aws_iam_policy" "special_instance_policy" {
-  name        = "special-instance-policy-${random_pet.fun-name.id}"
+  name        = "special-instance-policy-${var.random_pet_id}"
   description = "Policy to allow describing and stopping EC2 instances and accessing S3"
 
   policy = jsonencode({
@@ -35,4 +35,16 @@ resource "aws_iam_policy" "special_instance_policy" {
       }
     ]
   })
+}
+
+# Attach the special policy to the IAM role
+resource "aws_iam_role_policy_attachment" "attach_special_instance_policy" {
+  role       = aws_iam_role.ec2_instance_role_special.name
+  policy_arn = aws_iam_policy.special_instance_policy.arn
+}
+
+# Create an instance profile with the special IAM role
+resource "aws_iam_instance_profile" "ec2_instance_profile_special" {
+  name = "ec2-instance-profile-special-${var.random_pet_id}"
+  role = aws_iam_role.ec2_instance_role_special.name
 }

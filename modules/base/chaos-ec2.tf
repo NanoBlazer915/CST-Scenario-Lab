@@ -2,7 +2,7 @@
 resource "aws_instance" "cst_chaos_primary" {
   ami                         = var.ami_id
   instance_type               = var.instance_type
-  count                       = var.chaos_applied ? null : 1
+  count                       = var.chaos_applied ? 0 : 1
 #  count                       = 1  # Only one instance
   subnet_id                   = var.subnet_id
   associate_public_ip_address = true
@@ -43,21 +43,21 @@ resource "aws_instance" "cst_chaos_primary" {
 # Additional network interfaces (one per NIC)
 resource "aws_network_interface" "chaos_private_nic1" {
   
-  count                       = var.chaos_applied ? 1 : null
+  count                       = var.chaos_applied ? 0 : 1
   subnet_id        = var.private_subnet_id
   security_groups  = [var.security_group_id]
   description      = "Private NIC 1"
 }
 
 resource "aws_network_interface" "chaos_private_nic2" {
-  count                       = var.chaos_applied ? 1 : null
+  count                       = var.chaos_applied ? 0 : 1
   subnet_id        = var.private_subnet_id
   security_groups  = [var.security_group_id]
   description      = "Private NIC 2"
 }
 
 resource "aws_network_interface" "chaos_private_nic3" {
-  count                       = var.chaos_applied ? 1 : null
+  count                       = var.chaos_applied ? 0 : 1
   subnet_id        = var.private_subnet_id
   security_groups  = [var.security_group_id]
   description      = "Private NIC 3"
@@ -65,22 +65,22 @@ resource "aws_network_interface" "chaos_private_nic3" {
 
 # Attach network interfaces
 resource "aws_network_interface_attachment" "chaos_nic1_attachment" {
-  count                       = var.chaos_applied ? 1 : null
-  instance_id          = aws_instance.cst_chaos_primary[count.index].id
-  network_interface_id = aws_network_interface.chaos_private_nic1[count.index].id
+  count                       = var.chaos_applied ? 0 : 1
+  instance_id          = aws_instance.cst_chaos_primary[0].id
+  network_interface_id = aws_network_interface.chaos_private_nic1[0].id
   device_index         = 1
 }
 
 resource "aws_network_interface_attachment" "chaos_nic2_attachment" {
-  count                       = var.chaos_applied ? 1 : null
-  instance_id          = aws_instance.cst_chaos_primary[count.index].id
-  network_interface_id = aws_network_interface.chaos_private_nic2[count.index].id
+  count                       = var.chaos_applied ? 0 : 1
+  instance_id          = aws_instance.cst_chaos_primary[0].id
+  network_interface_id = aws_network_interface.chaos_private_nic2[0].id
   device_index         = 2
 }
 
 resource "aws_network_interface_attachment" "chaos_nic3_attachment" {
-  count                       = var.chaos_applied ? 1 : null
-  instance_id          = aws_instance.cst_chaos_primary[count.index].id
-  network_interface_id = aws_network_interface.chaos_private_nic3[count.index].id
+  count                       = var.chaos_applied ? 0 : 1
+  instance_id          = aws_instance.cst_chaos_primary[0].id
+  network_interface_id = aws_network_interface.chaos_private_nic3[0].id
   device_index         = 3
 }

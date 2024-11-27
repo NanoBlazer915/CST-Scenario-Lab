@@ -18,8 +18,8 @@ resource "aws_instance" "cst_scenario_specialty" {
     key_name        = var.key_name
     NAME_PREFIX     = "${var.name_prefix}-${var.random_pet_id}"# Pass the generated pet name
     WEKA_VERSION    = var.weka_version
-    instance_ids = join(" ", slice(var.backend_instance_ids, 0, 2))  # Pass two backend instance IDs
-    region       = var.aws_region                                   # Pass the AWS region
+    instance_ids = join(" ", slice(var.backend_instance_ids, 0, 2))  
+    region       = var.aws_region                                   
   })
 
   root_block_device {

@@ -94,3 +94,8 @@ variable "new_instance_count" {
   type = number
   default = 2
 }
+
+variable "aws_region" {
+  type = string
+  default = us-east-1
+}

@@ -89,3 +89,9 @@ variable "iam_instance_profile_name" {
   type        = string
 }
 
+variable "client_ami_id" {
+  description = "AMI ID for the instances"
+  type        = string
+  default     = "ami-018ba43095ff50d08"
+}
+

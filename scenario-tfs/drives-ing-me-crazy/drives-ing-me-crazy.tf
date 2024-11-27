@@ -7,7 +7,7 @@ module "base_infrastructure" {
   name_prefix = "CrazyD"
 }
 
-module "scenario_infrastructure" {
+module "scenario_chaos" {
   source      = "git::https://github.com/NanoBlazer915/CST-Scenario-Lab.git//modules/drives-ing-me-crazy"
   name_prefix = "CrazyD"
 

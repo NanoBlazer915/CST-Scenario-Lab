@@ -165,3 +165,7 @@ variable "weka_version" {
   default = "4.2.15"
 }
 
+variable "chaos_applied" {
+  type = bool
+  default = true
+}

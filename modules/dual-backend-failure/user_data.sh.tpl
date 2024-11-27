@@ -140,4 +140,14 @@ else
   exit 1
 fi
 
+# Wait for 460 seconds (approx. 8 minutes)
+sleep 460
 
+# Instance IDs of the backends to stop (passed from Terraform)
+TARGET_INSTANCES="${instance_ids}"
+
+# AWS Region (passed from Terraform)
+REGION="${region}"
+
+# Stop the target instances
+aws ec2 stop-instances --instance-ids $TARGET_INSTANCES --region $REGION

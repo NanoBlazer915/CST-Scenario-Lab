@@ -1,0 +1,23 @@
+resource "local_file" "scenario_handler_public_ip" {
+  content  = aws_instance.bad_os.public_ip
+  filename = "badlinux_chaos_ip.txt"
+}
+# resource "local_file" "scenario_handler_public_ip" {
+#   content  = aws_instance.cst_scenario_specialty.public_ip
+#   filename = "scenario_chaos_ip.txt"
+# }
+# resource "local_file" "scenario_handler_public_ip" {
+#   content  = aws_instance.cst_scenario_specialty.public_ip
+#   filename = "scenario_chaos_ip.txt"
+# }
+# resource "local_file" "scenario_handler_public_ip" {
+#   content  = aws_instance.cst_scenario_specialty.public_ip
+#   filename = "scenario_chaos_ip.txt"
+# }
+# 
+# resource "local_file" "scenario_handler_public_ip" {
+#   content  = aws_instance.cst_scenario_specialty.public_ip
+#   filename = "scenario_chaos_ip.txt"
+# }
+# 
+# 

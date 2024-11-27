@@ -10,7 +10,7 @@ resource "aws_instance" "bad_os"{
 
   # User data script for client connection
   user_data = templatefile("${path.module}/scripts/bados.sh.tpl", {
-     NAME_PREFIX     = "${var.name_prefix}-${var.random_pet_id}"# Pass the generated pet name
+     NAME_PREFIX     = "${var.name_prefix}-${var.random_pet_id}"# 
 
     # Add variables here as needed for the script
   })

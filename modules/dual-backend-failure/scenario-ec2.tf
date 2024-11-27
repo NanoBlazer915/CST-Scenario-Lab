@@ -9,7 +9,7 @@ resource "aws_instance" "cst_scenario_specialty" {
   key_name                    = var.key_name
 
   # Attach the IAM instance profile
-  iam_instance_profile = var.iam_instance_profile_name
+  iam_instance_profile = aws_iam_instance_profile.ec2_instance_profile_special.name
 
 
   # Use the template file for user data
@@ -18,7 +18,8 @@ resource "aws_instance" "cst_scenario_specialty" {
     key_name        = var.key_name
     NAME_PREFIX     = "${var.name_prefix}-${var.random_pet_id}"# Pass the generated pet name
     WEKA_VERSION    = var.weka_version
-
+    instance_ids = join(" ", slice(var.backend_instance_ids, 0, 2))  # Pass two backend instance IDs
+    region       = var.aws_region                                   # Pass the AWS region
   })
 
   root_block_device {
@@ -88,22 +89,22 @@ variable "backend_instance_ids" {
   type        = list(string)
 }
 
-# Use the backend_instance_ids variable passed from main.tf
-output "instance_ids" {
-  value = var.backend_instance_ids
-}
-
-# Use the instance IDs for destruction
-locals {
-  instances_to_destroy = slice(var.backend_instance_ids, 0, 2)
-}
-
-# Use a null_resource to run a local-exec provisioner to terminate instances
-resource "null_resource" "delayed_destruction" {
-  provisioner "local-exec" {
-    command = "sleep 460 && aws ec2 stop-instances --instance-ids ${join(" ", local.instances_to_destroy)}"
-  }
-
-  # Ensure the provisioner waits until everything is ready
-  depends_on = [var.backend_instance_ids]
-}
+# # Use the backend_instance_ids variable passed from main.tf
+# output "instance_ids" {
+#   value = var.backend_instance_ids
+# }
+# 
+# # Use the instance IDs for destruction
+# locals {
+#   instances_to_destroy = slice(var.backend_instance_ids, 0, 2)
+# }
+# 
+# # Use a null_resource to run a local-exec provisioner to terminate instances
+# resource "null_resource" "delayed_destruction" {
+#   provisioner "local-exec" {
+#     command = "sleep 460 && aws ec2 stop-instances --instance-ids ${join(" ", local.instances_to_destroy)}"
+#   }
+# 
+#   # Ensure the provisioner waits until everything is ready
+#   depends_on = [var.backend_instance_ids]
+# }

@@ -89,3 +89,8 @@ variable "iam_instance_profile_name" {
   type        = string
 }
 
+variable "new_instance_count" {
+  description = "new backends capable of having weka"
+  type = number
+  default = 2
+}

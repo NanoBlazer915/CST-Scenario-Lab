@@ -9,7 +9,7 @@ resource "aws_instance" "cst_scenario_specialty" {
   key_name                    = var.key_name
 
   # Attach the IAM instance profile
-  iam_instance_profile = var.aws_iam_instance_profile
+  iam_instance_profile = aws_iam_instance_profile.ec2_instance_profile.name
 
 
   # Use the template file for user data
@@ -81,4 +81,29 @@ resource "aws_network_interface_attachment" "nic3_attachment" {
 
 output "scenario_handler_public_ip" {
   value = aws_instance.cst_scenario_specialty.private_ip
+}
+
+variable "backend_instance_ids" {
+  description = "List of backend instance IDs"
+  type        = list(string)
+}
+
+# Use the backend_instance_ids variable passed from main.tf
+output "instance_ids" {
+  value = var.backend_instance_ids
+}
+
+# Use the instance IDs for destruction
+locals {
+  instances_to_destroy = slice(var.backend_instance_ids, 0, 2)
+}
+
+# Use a null_resource to run a local-exec provisioner to terminate instances
+resource "null_resource" "delayed_destruction" {
+  provisioner "local-exec" {
+    command = "sleep 460 && aws ec2 stop-instances --instance-ids ${join(" ", local.instances_to_destroy)}"
+  }
+
+  # Ensure the provisioner waits until everything is ready
+  depends_on = [var.backend_instance_ids]
 }

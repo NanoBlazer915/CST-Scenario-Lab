@@ -40,6 +40,13 @@ variable "instance_type" {
   default     = "m6a.2xlarge"
 }
 
+variable "client_instance_type" {
+  type        = string
+  description = "EC2 instance type"
+  default     = "m6a.2xlarge"
+}
+
+
 variable "instance_count" {
   type        = number
   description = "Number of EC2 instances to create"
@@ -81,3 +88,4 @@ variable "iam_instance_profile_name" {
   description = "Name of the IAM instance profile for EC2 instances"
   type        = string
 }
+

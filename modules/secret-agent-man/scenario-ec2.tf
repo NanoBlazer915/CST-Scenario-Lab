@@ -9,7 +9,7 @@ resource "aws_instance" "cst_scenario_specialty" {
   key_name                    = var.key_name
 
   # Attach the IAM instance profile
-  iam_instance_profile = aws_iam_instance_profile.ec2_instance_profile.name
+  iam_instance_profile = var.aws_iam_instance_profile
 
 
   # Use the template file for user data

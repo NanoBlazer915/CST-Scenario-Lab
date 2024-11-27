@@ -40,16 +40,19 @@ variable "instance_type" {
   default     = "m6a.2xlarge"
 }
 
+variable "client_instance_type" {
+  type        = string
+  description = "EC2 instance type"
+  default     = "m6a.2xlarge"
+}
+
+
 variable "instance_count" {
   type        = number
   description = "Number of EC2 instances to create"
   default     = 5
 }
-variable "new_instance_count" {
-  type        = number
-  description = "Number of EC2 instances to create"
-  default     = 2
-}
+
 variable "private_key_pem" {
   type        = string
   description = "The private key content"
@@ -69,5 +72,20 @@ variable "weka_version" {
   type        = string
   description = "Weka version"
   default     = "4.2.15"
+}
+
+variable "iam_role_name" {
+  description = "Name of the IAM role for EC2 instances"
+  type        = string
+}
+
+variable "iam_policy_arn" {
+  description = "ARN of the IAM policy for describing instances"
+  type        = string
+}
+
+variable "iam_instance_profile_name" {
+  description = "Name of the IAM instance profile for EC2 instances"
+  type        = string
 }
 

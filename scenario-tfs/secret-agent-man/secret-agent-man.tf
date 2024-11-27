@@ -20,5 +20,10 @@ module "scenario_infrastructure" {
   other_private_ips = module.base_infrastructure.instance_private_ips
   other_public_ips  = module.base_infrastructure.instance_public_ips
 
+  iam_role_name            = module.base_infrastructure.ec2_instance_role_name
+  iam_policy_arn           = module.base_infrastructure.describe_instances_policy_arn
+  iam_instance_profile_name = module.base_infrastructure.ec2_instance_profile_name
+
+
 
 }

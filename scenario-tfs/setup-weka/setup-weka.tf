@@ -5,4 +5,4 @@ provider "aws" {
 module "scenario_infrastructure" {
   source      = "git::https://github.com/NanoBlazer915/CST-Scenario-Lab.git//modules/setup-weka"
   name_prefix = "Setup-Weka"
-
+}

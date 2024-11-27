@@ -78,3 +78,21 @@ output "nfs" {
 output "smb" {
   value = var.smb
 }
+
+# Output for IAM Role
+output "ec2_instance_role_name" {
+  description = "Name of the IAM role for EC2 instances"
+  value       = aws_iam_role.ec2_instance_role.name
+}
+
+# Output for IAM Policy ARN
+output "describe_instances_policy_arn" {
+  description = "ARN of the describe instances IAM policy"
+  value       = aws_iam_policy.describe_instances_policy.arn
+}
+
+# Output for Instance Profile
+output "ec2_instance_profile_name" {
+  description = "Name of the IAM instance profile for EC2 instances"
+  value       = aws_iam_instance_profile.ec2_instance_profile.name
+}

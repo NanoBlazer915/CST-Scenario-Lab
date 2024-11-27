@@ -16,7 +16,7 @@ resource "aws_instance" "bad_os"{
   })
 
   # Attach the IAM instance profile for permissions
-  iam_instance_profile = aws_iam_instance_profile.ec2_instance_profile.name
+  iam_instance_profile = var.iam_instance_profile_name
 
   # Define the root block device
   root_block_device {

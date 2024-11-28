@@ -4,12 +4,12 @@ provider "aws" {
 
 module "base_infrastructure" {
   source      = "git::https://github.com/NanoBlazer915/CST-Scenario-Lab.git//modules/base"
-  name_prefix = "Secret-Agent-Man"
+  name_prefix = "drives0-error"
 }
 
-module "scenario_infrastructure" {
-  source      = "git::https://github.com/NanoBlazer915/CST-Scenario-Lab.git//modules/secret-agent-man"
-  name_prefix = "Secret-Agent-Man"
+module "scenario_chaos" {
+  source      = "git::https://github.com/NanoBlazer915/CST-Scenario-Lab.git//modules/drives-ing-me-crazy"
+  name_prefix = "drives0-error"
 
   subnet_id         = module.base_infrastructure.subnet_id
   private_subnet_id = module.base_infrastructure.private_subnet_id
@@ -19,7 +19,6 @@ module "scenario_infrastructure" {
   private_key_pem = module.base_infrastructure.private_key_pem
   other_private_ips = module.base_infrastructure.instance_private_ips
   other_public_ips  = module.base_infrastructure.instance_public_ips
-
   iam_role_name            = module.base_infrastructure.ec2_instance_role_name
   iam_policy_arn           = module.base_infrastructure.describe_instances_policy_arn
   iam_instance_profile_name = module.base_infrastructure.ec2_instance_profile_name

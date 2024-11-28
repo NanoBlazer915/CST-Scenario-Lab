@@ -87,6 +87,7 @@ install_weka() {
   return 1
 }
 
+mkdir /mnt/weka
 yum install -y iptables-services
 systemctl enable iptables
 systemctl start iptables

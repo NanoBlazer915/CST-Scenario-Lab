@@ -108,6 +108,7 @@ MAX_RETRIES=15  # Maximum number of retries for mounting
 # Create a comma-separated list of backend IPs
 BACKEND_IPS=$(cat /root/filtered-backend-ips.txt | tr '\n' ',' | sed 's/,$//')
 
+mkdir /mnt/weka
 sudo timedatectl set-ntp false
 sudo date -s "2024-01-01 00:00:00"
 

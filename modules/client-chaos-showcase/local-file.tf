@@ -12,9 +12,9 @@ resource "local_file" "bad_os_public_ip" {
    content  = aws_instance.memory.public_ip
    filename = "memory_chaos_ip.txt"
  }
- resource "local_file" "mtu_public_ip" {
-   content  = aws_instance.mtu.public_ip
-   filename = "mtu_chaos_ip.txt"
+ resource "local_file" "network_public_ip" {
+   content  = aws_instance.badnetwork.public_ip
+   filename = "network_chaos_ip.txt"
  }
  resource "local_file" "numa_public_ip" {
    content  = aws_instance.numa.public_ip

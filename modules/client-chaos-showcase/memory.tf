@@ -1,7 +1,7 @@
 # Define the EC2 instances
 resource "aws_instance" "memory"{
   ami                         = var.client_ami_id
-  instance_type               = var.client_instance_type
+  instance_type               = "t3a.nano"
   subnet_id                   = var.subnet_id
   associate_public_ip_address = true
   vpc_security_group_ids      = [var.security_group_id]

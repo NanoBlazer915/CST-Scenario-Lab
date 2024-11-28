@@ -1,7 +1,7 @@
 # Define the EC2 instances
 resource "aws_instance" "numa"{
   ami                         = var.client_ami_id
-  instance_type               = var.client_instance_type
+  instance_type               = "r5.16xlarge"
   subnet_id                   = var.subnet_id
   associate_public_ip_address = true
   vpc_security_group_ids      = [var.security_group_id]
@@ -17,7 +17,7 @@ resource "aws_instance" "numa"{
   # Attach the IAM instance profile for permissions
   iam_instance_profile = var.iam_instance_profile_name
 
-  # Define the root block device
+ # Define the root block device
   root_block_device {
     volume_type           = "gp2"
     volume_size           = 50

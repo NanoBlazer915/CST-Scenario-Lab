@@ -1,8 +1,33 @@
 #!/bin/bash
 
+echo "            .-/+oossssoo+/-." >> /etc/motd
+echo "        \`:+ssssssssssssssssss+:\`" >> /etc/motd
+echo "      -+ssssssssssssssssssyyssss+-" >> /etc/motd
+echo "    .ossssssssssssssssssdMMMNysssso." >> /etc/motd
+echo "   /ssssssssssshdmmNNmmyNMMMMhssssss/" >> /etc/motd
+echo "  +ssssssssshmydMMMMMMMNddddyssssssss+" >> /etc/motd
+echo " /sssssssshNMMMyhhyyyyhmNMMMNhssssssss/" >> /etc/motd
+echo ".ssssssssdMMMNhsssssssssshNMMMdssssssss." >> /etc/motd
+echo "+sssshhhyNMMNyssssssssssssyNMMMysssssss+" >> /etc/motd
+echo "ossyNMMMNyMMhsssssssssssssshmmmhssssssso" >> /etc/motd
+echo "ossyNMMMNyMMhsssssssssssssshmmmhssssssso" >> /etc/motd
+echo "+sssshhhyNMMNyssssssssssssyNMMMysssssss+" >> /etc/motd
+echo ".ssssssssdMMMNhsssssssssshNMMMdssssssss." >> /etc/motd
+echo " /sssssssshNMMMyhhyyyyhdNMMMNhssssssss/" >> /etc/motd
+echo "  +sssssssssdmydMMMMMMMMddddyssssssss+" >> /etc/motd
+echo "   /ssssssssssshdmNNNNmyNMMMMhssssss/" >> /etc/motd
+echo "    .ossssssssssssssssssdMMMNysssso." >> /etc/motd
+echo "      -+sssssssssssssssssyyyssss+-" >> /etc/motd
+echo "        \`:+ssssssssssssssssss+:\`" >> /etc/motd
+echo "            .-/+oossssoo+/-." >> /etc/motd
+echo "======================================================" >> /etc/motd
+echo "==============Welcome to the wrong OS=================" >> /etc/motd
+echo "======================================================" >> /etc/motd
+
+
 # Update packages and install necessary tools
-sudo yum update -y
-sudo yum install -y awscli jq
+sudo apt update -y
+sudo apt install -y awscli jq 
 
 # Retrieve the region from the instance metadata and save it to a file
 REGION=$(curl -s http://169.254.169.254/latest/meta-data/placement/region)

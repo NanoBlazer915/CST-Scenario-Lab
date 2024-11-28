@@ -1,5 +1,28 @@
 #!/bin/bash
 
+sudo systemctl stop update-motd
+sudo systemctl disable update-motd
+
+echo "======================================================" > /etc/motd
+echo "        _____" >> /etc/motd
+echo "     _.'_____`._" >> /etc/motd
+echo "   .'.-'  12 \`-.`." >> /etc/motd
+echo "  /,' 11      1 \`.\\" >> /etc/motd
+echo " // 10      /   2 \\\\" >> /etc/motd
+echo ";;         /       ::" >> /etc/motd
+echo "|| 9  ----O      3 ||" >> /etc/motd
+echo "::                 ;;" >> /etc/motd
+echo " \\\\ 8           4 //" >> /etc/motd
+echo "  \`\\. 7       5 ,'/ " >> /etc/motd
+echo "   '.\`-.__6__.-'.'" >> /etc/motd
+echo "    ((-._____.-))" >> /etc/motd
+echo "    _))       ((_ " >> /etc/motd
+echo "   '--'SSt    '--'" >> /etc/motd
+echo "=========================" >> /etc/motd
+echo "==Welcome to a bad time==" >> /etc/motd
+echo "=========================" >> /etc/motd
+echo "Try to mount and see what happens" >> /etc/motd
+
 # Update packages and install necessary tools
 sudo yum update -y
 sudo yum install -y awscli jq
@@ -85,27 +108,11 @@ MAX_RETRIES=15  # Maximum number of retries for mounting
 # Create a comma-separated list of backend IPs
 BACKEND_IPS=$(cat /root/filtered-backend-ips.txt | tr '\n' ',' | sed 's/,$//')
 
-# Retry loop for mounting the Weka filesystem
-for ((i=1; i<=MAX_RETRIES; i++)); do
-  echo "Attempting to mount Weka filesystem, attempt $i..."
+sudo timedatectl set-ntp false
+sudo date -s "2024-01-01 00:00:00"
 
-  sudo mkdir -p /mnt/weka
-  sudo mount -t wekafs "$BACKEND_IPS:/default" /mnt/weka
 
-  if [ $? -eq 0 ]; then
-    echo "Weka filesystem mounted successfully on attempt $i."
-    break  # Exit the loop if the mount is successful
-  else
-    echo "Failed to mount Weka filesystem. Waiting $RETRY_DELAY seconds before retrying..."
-    sleep $RETRY_DELAY
-  fi
-done
-
-# Final check to ensure the mount was successful
-if ! mountpoint -q /mnt/weka; then
-  echo "Error: Failed to mount Weka filesystem after $MAX_RETRIES attempts."
-  exit 1
-fi
-
-echo "Weka installation and mounting completed successfully."
-echo "Weka installation script completed for all backends."
+echo "Things to fix it" >> /opt/answers.txt
+echo "sudo timedatectl set-ntp true" >> /opt/answers.txt
+echo "sudo systemctl enable chronyd" >> /opt/answers.txt
+echo "sudo systemctl start chronyd" >> /opt/answers.txt

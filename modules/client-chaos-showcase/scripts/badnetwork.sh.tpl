@@ -1,5 +1,23 @@
 #!/bin/bash
 
+sudo systemctl stop update-motd
+sudo systemctl disable update-motd
+
+echo "======================================================" > /etc/motd
+echo "   _______________" >> /etc/motd
+echo "  |               |" >> /etc/motd
+echo "  |  [] [] [] []  |" >> /etc/motd
+echo "  |  [] [] [] []  |" >> /etc/motd
+echo "  |  [] [] [] []  |" >> /etc/motd
+echo "  |  [] [] [] []  |" >> /etc/motd
+echo "  |_______________|" >> /etc/motd
+echo "==============================" >> /etc/motd
+echo "===Welcome to Bad Network-====" >> /etc/motd
+echo "==============================" >> /etc/motd
+echo "Try using nc to test ports and find out what's wrong" >> /etc/motd
+
+
+
 # Update packages and install necessary tools
 sudo yum update -y
 sudo yum install -y awscli jq
@@ -69,43 +87,10 @@ install_weka() {
   return 1
 }
 
-# Loop through each backend IP and attempt to install Weka with retries
-for IP in $(cat /root/filtered-backend-ips.txt); do
-  install_weka $IP
-done
-
-# Mount the Weka filesystem
-#sudo mkdir -p /mnt/weka
-#sudo mount -t wekafs "$(cat /root/filtered-backend-ips.txt|tr '\n' ',' | sed 's/,$//')/default" /mnt/weka
-
-# Define retry settings for mounting
-RETRY_DELAY=60  # Time to wait between retries (in seconds)
-MAX_RETRIES=15  # Maximum number of retries for mounting
-
-# Create a comma-separated list of backend IPs
-BACKEND_IPS=$(cat /root/filtered-backend-ips.txt | tr '\n' ',' | sed 's/,$//')
-
-# Retry loop for mounting the Weka filesystem
-for ((i=1; i<=MAX_RETRIES; i++)); do
-  echo "Attempting to mount Weka filesystem, attempt $i..."
-
-  sudo mkdir -p /mnt/weka
-  sudo mount -t wekafs "$BACKEND_IPS:/default" /mnt/weka
-
-  if [ $? -eq 0 ]; then
-    echo "Weka filesystem mounted successfully on attempt $i."
-    break  # Exit the loop if the mount is successful
-  else
-    echo "Failed to mount Weka filesystem. Waiting $RETRY_DELAY seconds before retrying..."
-    sleep $RETRY_DELAY
-  fi
-done
-
-# Final check to ensure the mount was successful
-if ! mountpoint -q /mnt/weka; then
-  echo "Error: Failed to mount Weka filesystem after $MAX_RETRIES attempts."
-  exit 1
-fi
-
-echo "Weka installation and mounting completed successfully."
-echo "Weka installation script completed for all backends."
+yum install -y iptables-services
+systemctl enable iptables
+systemctl start iptables
+iptables -I INPUT -p tcp --match multiport --dports 14000:14100 -j REJECT
+iptables -I OUTPUT -p tcp --match multiport --sports 14000:14100 -j REJECT
+iptables -L -n -v
+service iptables save

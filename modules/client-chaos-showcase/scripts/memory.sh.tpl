@@ -1,5 +1,17 @@
 #!/bin/bash
 
+sudo systemctl stop update-motd
+sudo systemctl disable update-motd
+
+echo " _______________________" >> /etc/motd
+echo "|  ___________________  |" >> /etc/motd
+echo "| | Welcome to bad Ram  | |" >> /etc/motd
+echo "| |___________________| |" >> /etc/motd
+echo "|_______________________|" >> /etc/motd
+echo " |||||||||||||||||||||||" >> /etc/motd
+echo " |||||||||||||||||||||||" >> /etc/motd
+
+
 # Update packages and install necessary tools
 sudo yum update -y
 sudo yum install -y awscli jq

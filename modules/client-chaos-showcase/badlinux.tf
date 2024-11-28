@@ -1,6 +1,6 @@
 # Define the EC2 instances
 resource "aws_instance" "bad_os"{
-  ami                         = "ami-064519b8c76274859"
+  ami                         = "ami-04552bb4f4dd38925"
   instance_type               = var.client_instance_type
  # count                       = 1
   subnet_id                   = var.subnet_id

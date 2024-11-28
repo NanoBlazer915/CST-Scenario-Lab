@@ -1,5 +1,30 @@
 #!/bin/bash
 
+sudo systemctl stop update-motd
+sudo systemctl disable update-motd
+
+
+echo "           .:.:.:.-.-.-.:.:.:.:.           " >> /etc/motd
+echo "           .*-+-*=%-%-%-#=*-*-*.           " >> /etc/motd
+echo "        .:=*::::::::::::::::::-*=:.        " >> /etc/motd
+echo "        .:+=::::::::::::::::::-++:.        " >> /etc/motd
+echo "        .:+=:::*###########*::-+*:.        " >> /etc/motd
+echo "        ..+=:::#===========%::-++..        " >> /etc/motd
+echo "        ..+=:::#===========%::-++..        " >> /etc/motd
+echo "        ..==:::#===========%::-++..        " >> /etc/motd
+echo "        ..+=:::#===========%::-++..        " >> /etc/motd
+echo "        .:+=:::#===========%::-++:.        " >> /etc/motd
+echo "        .-*=:::************#::-+*-.        " >> /etc/motd
+echo "        .:+=::::::::::::::::::-+*:.        " >> /etc/motd
+echo "        .:=*::::::::::::::::::-*+:.        " >> /etc/motd
+echo "           .*-*=#=%-%-%-#=#-*-*.           " >> /etc/motd
+echo "           .:.:.:.-.=.-.-.:.:.:.           " >> /etc/motd
+echo "===========================================" >> /etc/motd
+echo "==========Welcome to No good Numa==========" >> /etc/motd
+echo "===========================================" >> /etc/motd
+echo "Not sure if this is possible due to aws not having the network card in any region" >> /etc/motd
+
+
 # Update packages and install necessary tools
 sudo yum update -y
 sudo yum install -y awscli jq

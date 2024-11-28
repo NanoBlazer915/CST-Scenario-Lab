@@ -3,14 +3,14 @@ provider "aws" {
   }
 
 module "base_infrastructure" {
-  source      = "/Users/jake/terraform/CST-Scenario-Lab/modules/base"
-  name_prefix = "LinuxOS-Kernel"
+  source      = "git::https://github.com/NanoBlazer915/CST-Scenario-Lab.git//modules/base"
+  name_prefix = "CC-Showcase"
   chaos_applied = false
 }
 
 module "scenario_infrastructure" {
-  source      = "/Users/jake/terraform/CST-Scenario-Lab/modules/client-chaos-showcase"
-  name_prefix = "LinuxOS-Kernel"
+  source      = "git::https://github.com/NanoBlazer915/CST-Scenario-Lab.git//modules/client-chaos-showcase"
+  name_prefix = "CC-Showcase"
 
   subnet_id         = module.base_infrastructure.subnet_id
   private_subnet_id = module.base_infrastructure.private_subnet_id
